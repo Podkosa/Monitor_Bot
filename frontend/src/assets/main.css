@@ -1,0 +1,30 @@
+:root {
+    --bg-color: #e6e4e4;
+    --br-color: #cccccc;
+    --highlight-color: #ff9933;
+}
+
+html, body, #app {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Verdana, sans-serif;
+}
+
+button {
+    display: block;
+    border: 3px solid var(--br-color);
+    border-radius: 20px;
+    margin: 0.5rem auto;
+    /* min-width: fit-content;
+    max-width: 100%; */
+    width: auto;
+    transition: border 0.4s;
+}
+
+button:hover {
+    border: 3px solid var(--highlight-color);
+    transition: border 0.25s;
+}
