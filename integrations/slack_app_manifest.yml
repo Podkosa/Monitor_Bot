@@ -8,32 +8,32 @@ features:
     always_online: false
   slash_commands:
     - command: /full_check
-      url: http://your_moni_host/slack/
+      url: https://your_moni_host/slack/
       description: Full check
       usage_hint: "[host1, host2, ...]"
       should_escape: false
     - command: /ping
-      url: http://your_moni_host/slack/
+      url: https://your_moni_host/slack/
       description: Ping servers
       usage_hint: "[host1, host2, ...]"
       should_escape: false
     - command: /celery
-      url: http://your_moni_host/slack/
+      url: https://your_moni_host/slack/
       description: Check Celery
       usage_hint: "[host1, host2, ...]"
       should_escape: false
     - command: /workers
-      url: http://your_moni_host/slack/
+      url: https://your_moni_host/slack/
       description: Workers status
       usage_hint: "[host1, host2, ...]"
       should_escape: false
     - command: /queues
-      url: http://your_moni_host/slack/
+      url: https://your_moni_host/slack/
       description: Queues size
       usage_hint: "[host1, host2, ...]"
       should_escape: false
     - command: /docker
-      url: http://your_moni_host/slack/
+      url: https://your_moni_host/slack/
       description: Docker containers status
       usage_hint: "[host1, host2, ...]"
       should_escape: false
@@ -46,7 +46,7 @@ oauth_config:
 settings:
   interactivity:
     is_enabled: true
-    request_url: http://your_moni_host/slack/
+    request_url: https://your_moni_host/slack/
   org_deploy_enabled: false
   socket_mode_enabled: false
   token_rotation_enabled: false
