@@ -128,7 +128,7 @@ class Checker(ABC):
                 if followup_result['status']:
                     break
         logger.debug(f'Finished follow up {self}: back to normal')
-        followup_result['message'] = f'{self.host} is back to normal'
+        followup_result['message'] = f'{self} is back to normal'
         await self.alert(followup_result)
 
     @classmethod
