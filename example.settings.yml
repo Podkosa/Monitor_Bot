@@ -1,6 +1,14 @@
 api_key: key                          # Access to all bot endpoints. Send it as `access_token` in header/cookie/query_param with your requests.
 
 checkers:                             # What to monitor
+  default:                            # Top level default values
+    cycle: 300                        # Seconds to wait between checks
+    handlers: [console]
+    protocol: 'https'                 # Protocol for checkers requests
+    back_to_normal: false             # On a negative check alert normally, on further negative checks do not alert again, on a successful check send "back to normal" message. Defaults to False.
+    back_to_normal_cycle: 10          # Back to normal follow up cycle. Set this to less than `cycle` to do follow up checks faster. Defaults to `cycle`.
+    not_normal_for: 1                 # Number of cycles that must fail to be considered not normal. E.g. alert only when your server doesn't respond for 3 cycles (3*300 sec = 15 min). Defaults to 1.
+
   flower:
     options:
       queues:
@@ -53,13 +61,6 @@ handlers:                             # Where to send alerts. All handlers send 
 
 watchdog:
   integrated: true                    # Start Watchdog inside Bot async event loop.
-  default:                            # Global default values
-    cycle: 300                        # Seconds to wait between checks
-    handlers: [console]
-    protocol: 'https'                 # Protocol for checkers requests
-    back_to_normal: false             # On a negative check alert normally, on further negative checks do not alert again, on a successful check send "back to normal" message. Defaults to False.
-    back_to_normal_cycle: 10          # Back to normal follow up cycle. Set this to less than `cycle` to do follow up checks faster. Defaults to `cycle`.
-    not_normal_for: 1                 # Number of cycles that must fail to be considered not normal. E.g. alert only when your server doesn't respond for 3 cycles (3*300 sec = 15 min). Defaults to 1.
 
 integrations:
   slack:

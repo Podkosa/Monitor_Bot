@@ -28,9 +28,12 @@ Shared across all checkers are `cycle`, `handlers`, `protocol`, `port`, `back_to
 -   `back_to_normal_cycle`: `integer | float`<br>
     Optional back to normal follow up cycle. Set this to less than `cycle` to do follow up checks faster. Defaults to `cycle`. 
 
+-   `not_normal_for`: `integer`<br>
+    Alert only when server check fails this number of cycles. Defaults to 1. 
+
 ## Defaults
-Default parameters might be specified to avoid repeating them for each server. Can be defined on Checker or Watchdog level.<br>
-Lookup order is Server, Checker, Watchdog.
+Default parameters might be specified to avoid repeating them for each server. Can be defined on a specific Checker or Global level.<br>
+Lookup order is Server, Checker, Global.
 
 ## Request timeout
 You can set a custom timeout for **Checkers** requests to your servers. Default is:

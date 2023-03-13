@@ -46,7 +46,6 @@ Define your servers, handlers, integrations and other settings declaratively in 
 
 - Telegram integration
 - Email handler
-- Alert when X is not normal for more than N time
 - Slack timeout for /commands is 3 seconds. Refactor to delay the response.
 - Slack button on an alert to open up related service
 - Web interface for settings and checks

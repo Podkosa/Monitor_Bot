@@ -38,6 +38,7 @@ if not CHECKERS:
 
 SHH_DEPENDENT_CHECKERS = {'docker'}
 
+checkers_defaults = CHECKERS.pop('default', {}) or {}                               # Top level defaults
 for checker, conf in CHECKERS.items():
     if not conf:
         raise SettingsError(f'{checker} checker has incorrect value: {conf}')
@@ -45,7 +46,7 @@ for checker, conf in CHECKERS.items():
         raise SettingsError(f'{checker} checker has no servers defined')
     if checker in SHH_DEPENDENT_CHECKERS and not pathlib.Path('/root/.ssh').exists():
         raise SettingsError(f'{checker} checker is defined, but /root/.ssh directory is not found. Make sure to mount it through a volume.')
-    defaults = WATCHDOG.get('default', {}).copy()                                   # Watchdog level defaults
+    defaults = checkers_defaults.copy()
     defaults.update(conf.get('default', {}))                                        # Checker level defaults
     for host, params in conf['servers'].items():
         if params is None:
