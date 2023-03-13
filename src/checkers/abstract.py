@@ -31,7 +31,8 @@ class Checker(ABC):
         protocol: str = 'https',
         back_to_normal: bool = False,
         back_to_normal_cycle: int | float | None = None,
-        include_normal: bool = False    # Alert regardless of status
+        include_normal: bool = False,   # Alert regardless of status,
+        not_normal_for: int = 1
         ):
         self.host = host
         self.port = port
@@ -42,6 +43,9 @@ class Checker(ABC):
         self.back_to_normal_cycle = back_to_normal_cycle
         self.last_check = {}
         self.include_normal = include_normal
+
+        self.not_normal_for = not_normal_for
+        self._failed_count = 0          # not_normal_for count
 
 
     def __str__(self):
@@ -58,10 +62,14 @@ class Checker(ABC):
     async def run(self):
         """Run a check, store results, alert if something is not normal."""
         self.result = await self.check()
-        if not self.result['status']:
-            await self.alert(self.result)
-            if self.back_to_normal:
-                await self.back_to_normal_monitor()
+        if self.result['status']:
+            self._failed_count = 0
+        else:
+            self._failed_count += 1
+            if self._failed_count >= self.not_normal_for:
+                await self.alert(self.result)
+                if self.back_to_normal:
+                    await self.back_to_normal_monitor()
 
     async def check(self) -> dict:
         try:
@@ -73,13 +81,12 @@ class Checker(ABC):
         else:
             status = self._parse_data()
             message = self._prepare_message()
-        result = {
+        return {
             'host': self.host,
             'check': self.name,
             'status': status,
             'message': message
         }
-        return result
 
     @abstractmethod
     async def _get_data(self) -> None:

@@ -55,6 +55,7 @@ for checker, conf in CHECKERS.items():
         params.setdefault('protocol', defaults.get('protocol', 'https'))
         params.setdefault('back_to_normal', defaults.get('back_to_normal', False))
         params.setdefault('back_to_normal_cycle', defaults.get('back_to_normal_cycle', params['cycle']))
+        params.setdefault('not_normal_for', defaults.get('not_normal_for', 1))
         getattr(default_setters, checker, lambda *args: None)(params, defaults)     # Server level defaults
 
 ### Handlers ###
